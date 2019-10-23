@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>CustomElementDemo</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+<body>
+  <flight-info id="info"></flight-info>
+
+  <script>
+  
+    document.addEventListener('DOMContentLoaded', function() {
+
+      const elm = document.getElementById('info');
+      elm.flight = { id: 17, from: 'VIE', to: 'MUC', date: 'now' };
+      elm.addEventListener('selected-change', function(e) {
+        console.debug('event', e);
+      });
+
+    });
+  
+  </script>
+
+</body>
+</html>

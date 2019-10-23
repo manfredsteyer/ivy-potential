@@ -18,7 +18,7 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
-            "aot": false,
+            "aot": true,
             "assets": [
               "src/favicon.ico",
               "src/assets"
@@ -41,7 +41,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -116,6 +115,123 @@
           "configurations": {
             "production": {
               "devServerTarget": "ivy-demo:serve:production"
+            }
+          }
+        }
+      }
+    },
+    "custom-element-demo": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "projects/custom-element-demo",
+      "sourceRoot": "projects/custom-element-demo/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/custom-element-demo",
+            "index": "projects/custom-element-demo/src/index.html",
+            "main": "projects/custom-element-demo/src/main.ts",
+            "polyfills": "projects/custom-element-demo/src/polyfills.ts",
+            "tsConfig": "projects/custom-element-demo/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/custom-element-demo/src/favicon.ico",
+              "projects/custom-element-demo/src/assets"
+            ],
+            "styles": [
+              "projects/custom-element-demo/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/custom-element-demo/src/environments/environment.ts",
+                  "with": "projects/custom-element-demo/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "custom-element-demo:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "custom-element-demo:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "custom-element-demo:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/custom-element-demo/src/test.ts",
+            "polyfills": "projects/custom-element-demo/src/polyfills.ts",
+            "tsConfig": "projects/custom-element-demo/tsconfig.spec.json",
+            "karmaConfig": "projects/custom-element-demo/karma.conf.js",
+            "assets": [
+              "projects/custom-element-demo/src/favicon.ico",
+              "projects/custom-element-demo/src/assets"
+            ],
+            "styles": [
+              "projects/custom-element-demo/src/styles.css"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/custom-element-demo/tsconfig.app.json",
+              "projects/custom-element-demo/tsconfig.spec.json",
+              "projects/custom-element-demo/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/custom-element-demo/e2e/protractor.conf.js",
+            "devServerTarget": "custom-element-demo:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "custom-element-demo:serve:production"
             }
           }
         }

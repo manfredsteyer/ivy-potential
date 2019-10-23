@@ -1,0 +1,23 @@
+<div class="flight" [style.backgroundColor]="selected ? 'lightblue' : 'white'" style="border: 2px solid black; padding: 20px; width:200px; font-family: arial">
+  <table>
+    <tr>
+      <td class="label">Id</td>
+      <td>{{flight?.id}}</td>
+    </tr>
+    <tr>
+        <td class="label">From</td> 
+        <td>{{flight?.from}}</td>
+    </tr>
+    <tr>
+        <td class="label">To</td>
+        <td>{{flight?.to}}</td>
+    </tr>
+    <tr>
+        <td class="label">Date</td>
+        <td>{{flight?.date}}</td>
+    </tr>
+  </table>
+  <button (click)="toggle()">Select</button>
+  <button (click)="toggle()">Remove</button>      
+  
+</div>

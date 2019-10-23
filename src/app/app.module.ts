@@ -9,6 +9,7 @@ import { APP_ROUTES} from './app.routes';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { DashboardPageComponent } from './dashboard-page/dashboard-page.component';
+import { RoutedComponent } from './routed/routed.component';
 
 @NgModule({
    imports: [
@@ -20,7 +21,8 @@ import { DashboardPageComponent } from './dashboard-page/dashboard-page.componen
       AppComponent,
       SidebarComponent,
       NavbarComponent,
-      DashboardPageComponent
+      DashboardPageComponent,
+      RoutedComponent,
    ],
    providers: [],
    schemas: [

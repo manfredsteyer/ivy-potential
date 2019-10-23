@@ -7,7 +7,7 @@ import { BAR_COMPONENTS } from '../bar';
   templateUrl: './dashboard-tile.component.html'
 })
 @ComponentDeps({
-  directives: [ 
+  directives: [
     ...BAR_COMPONENTS
   ]
 })

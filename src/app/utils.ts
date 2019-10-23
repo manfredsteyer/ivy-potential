@@ -6,8 +6,8 @@ import {
 } from '@angular/core';
 
 export function getComponentDef<T>(t: Type<T>): ComponentDef<T> {
-  if (t['ngComponentDef']) {
-    return t['ngComponentDef'] as ComponentDef<T>;
+  if (t['ɵcmp']) {
+    return t['ɵcmp'] as ComponentDef<T>;
   }
 
   throw new Error('No Angular definition found for ' + t.name);
@@ -20,8 +20,8 @@ export function getDirectiveDef<T>(t: Type<T>): DirectiveDef<T> {
     }
 
     // A Component(Def) is also a Directive(Def)
-    if (t['ngComponentDef']) {
-      return t['ngComponentDef'] as ComponentDef<T>;
+    if (t['ɵcmp']) {
+      return t['ɵcmp'] as ComponentDef<T>;
     }
 
     throw new Error('No Angular definition found for ' + t.name);
@@ -51,10 +51,10 @@ export interface ComponentDepsConfig {
 
 export function ComponentDeps(config: ComponentDepsConfig) {
   return (component) => {
-   
+
     const def = getComponentDef(component);
-    def.schemas = [CUSTOM_ELEMENTS_SCHEMA, ...def.schemas];
-    
+    def.schemas = [CUSTOM_ELEMENTS_SCHEMA];
+
     let directiveDefs: Array<any>;
     if (typeof def.directiveDefs === 'function') {
       directiveDefs = def.directiveDefs();
@@ -69,5 +69,5 @@ export function ComponentDeps(config: ComponentDepsConfig) {
       ...getPipeDefs(config.pipes || [])
     ];
 
-  }
+  };
 }

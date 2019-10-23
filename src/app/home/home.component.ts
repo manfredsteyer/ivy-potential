@@ -1,5 +1,4 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -8,5 +7,5 @@ import {ActivatedRoute} from '@angular/router';
   encapsulation: ViewEncapsulation.None
 })
 export class HomeComponent {
-  value1: boolean = true;  
+  info = 'Welcome!';
 }

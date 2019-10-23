@@ -16,13 +16,12 @@ import { ActivatedRoute } from '@angular/router';
 export function withRoute(inner: Type<any>) {
 
     const ngComponent = inner as ɵComponentType<any>;
-
-    const compDef = ngComponent.ngComponentDef as ɵComponentDef<any>;
-    const elementName = compDef.selectors[0][0] as string;
-
+    const innerCompDef = ngComponent.ɵcmp as ɵComponentDef<any>;
+    const elementName = innerCompDef.selectors[0][0] as string;
+    
     class HigherOrderComponent implements OnInit {
 
-        static ngComponentDef: ɵComponentDef<HigherOrderComponent>;
+        static ɵcmp: ɵComponentDef<HigherOrderComponent>;
 
         params: any = {};
 
@@ -36,11 +35,12 @@ export function withRoute(inner: Type<any>) {
         }
     }
 
-    (HigherOrderComponent as any).ngFactoryDef = () => new HigherOrderComponent(ɵɵdirectiveInject(ActivatedRoute));
+    (HigherOrderComponent as any).ɵfac = () => new HigherOrderComponent(ɵɵdirectiveInject(ActivatedRoute));
 
-    HigherOrderComponent.ngComponentDef = ɵɵdefineComponent({
-        consts: 1,
+    HigherOrderComponent.ɵcmp = ɵɵdefineComponent({
+        consts: [[]],
         vars: 1,
+        decls: 1,
         directives: [
             inner
         ],
@@ -50,13 +50,13 @@ export function withRoute(inner: Type<any>) {
 
             if (rf & ɵRenderFlags.Create) {
                ɵɵelement(0, elementName, null, ['wrapped', '']);
+
             }
             if (rf & ɵRenderFlags.Update) {
-                for (const prop in ctx.params) {
-                    const compProp = compDef.inputs[prop];
-                    if (compProp) {
-                       ɵɵproperty(prop, ctx.params[compProp]);
-                       //         ^--- year input   ^---- year in url
+                for (const routingParam in ctx.params) {
+                    const propName = innerCompDef.inputs[routingParam];
+                    if (propName) {
+                       ɵɵproperty(routingParam, ctx.params[propName]);
                     }
                 }
             }

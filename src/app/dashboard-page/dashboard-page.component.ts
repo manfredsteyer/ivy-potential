@@ -38,10 +38,13 @@ export class DashboardPageComponent implements OnInit, OnChanges {
 		import('../dashboard-tile/dashboard-tile.component').then(m => {
 			const comp = m.DashboardTileComponent;
 
-			// Only b/c of compatability; will not be needed in future!
-			const factory = this.cfr.resolveComponentFactory(comp);
+			// Only b/c of compatibility; will not be needed in future!
+			const factory = 
+				this.cfr.resolveComponentFactory(comp);
 			
-			const compRef = this.viewContainer.createComponent(factory, null, this.injector);
+			const compRef = this.viewContainer.createComponent(
+				factory, null, this.injector);
+				
 			const compInstance = compRef.instance;
 			
 			compInstance.a = data[0];
